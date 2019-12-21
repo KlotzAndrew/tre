@@ -1,0 +1,9 @@
+language: ruby
+
+script:
+  - bundle install - jobs=3 - retry=3
+  - curl -o testrecall-uploader https://s3.amazonaws.com/releases.testrecall.com/testrecall-uploader
+  - chmod +x testrecall-uploader
+
+  - rspec --format progress --format RspecJunitFormatter --out report.xml
+  - ./testrecall-uploader -file report.xml
