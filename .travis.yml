@@ -6,4 +6,4 @@ script:
   - chmod +x testrecall-uploader
 
   - rspec --format progress --format RspecJunitFormatter --out report.xml
-  - ./testrecall-uploader -file report.xml
+  - TR_PROJECT_NAME=tre ./testrecall-uploader -file report.xml
