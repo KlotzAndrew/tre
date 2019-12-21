@@ -12,3 +12,11 @@ RSpec.configure do |config|
     $stderr = STDERR
   end
 end
+
+def rand_delay(min, max)
+  sleep(rand(min..max))
+end
+
+def rand_fail(percentage)
+  expect(percentage).to be < rand(1..100)
+end
