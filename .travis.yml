@@ -5,5 +5,4 @@ script:
   - curl -o testrecall-uploader https://s3.amazonaws.com/releases.testrecall.com/testrecall-uploader
   - chmod +x testrecall-uploader
 
-  - bundle exec rspec --format progress --format RspecJunitFormatter --out report.xml
-  - TR_PROJECT_NAME=tre ./testrecall-uploader -file report.xml
+  - ./test.sh
