@@ -1,7 +1,7 @@
-language: ruby
+language: go
 
 script:
-  - bundle install
+  - go get -u github.com/jstemmer/go-junit-report
   - curl -o testrecall-uploader https://s3.amazonaws.com/releases.testrecall.com/testrecall-uploader
   - chmod +x testrecall-uploader
 
