@@ -8,7 +8,7 @@ describe "billing" do
 
   it "make payment" do
     rand_delay(0.0, 0.5)
-    rand_fail(2)
+    rand_fail(20)
   end
 
   it "add billing frequency" do
