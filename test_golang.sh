@@ -2,7 +2,7 @@
 
 set -x
 
-for i in {0..5}; do
+for i in {0..10}; do
   echo "$i"
   go test -count=1 -v 2>&1 ./golang/... | tee ./output.log
   go-junit-report < ./output.log > ./report.xml -set-exit-code

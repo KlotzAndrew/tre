@@ -11,41 +11,28 @@ func init() {
 }
 
 func TestBilling(t *testing.T) {
-	for _, tt := range []struct {
-		name string
-	}{
-		{"foo"},
-		{"bar"},
-		{"baz"},
-		{"buzz"},
-		{"faz"},
-	} {
-
-		if value := rand.Intn(20); value < 1 {
-			time.Sleep(time.Millisecond * time.Duration(rand.Intn(20)))
-			t.Errorf("name: %v got %v, want %v", tt.name, value, 10)
-		}
+	time.Sleep(time.Millisecond * time.Duration(rand.Intn(20)))
+	if value := rand.Intn(4); value < 1 {
+		t.Errorf("got %v, want %v", value, 10)
 	}
+}
+
+func TestSilverPlan(t *testing.T) {
+	time.Sleep(time.Millisecond * time.Duration(rand.Intn(5)))
+}
+
+func TestGoldPlan(t *testing.T) {
+	time.Sleep(time.Millisecond * time.Duration(rand.Intn(5)))
+}
+
+func TestPlatinumPlan(t *testing.T) {
+	time.Sleep(time.Millisecond * time.Duration(rand.Intn(5)))
 }
 
 func TestAddPayment(t *testing.T) {
-	time.Sleep(time.Millisecond * time.Duration(rand.Intn(20)))
+	time.Sleep(time.Millisecond * time.Duration(rand.Intn(5)))
 }
 
 func TestMakePayment(t *testing.T) {
-	for _, tt := range []struct {
-		name string
-	}{
-		{"foo"},
-		{"bar"},
-		{"baz"},
-		{"buzz"},
-		{"faz"},
-	} {
-
-		if value := rand.Intn(20); value < 1 {
-			time.Sleep(time.Millisecond * time.Duration(rand.Intn(20)))
-			t.Errorf("name: %v got %v, want %v", tt.name, value, 10)
-		}
-	}
+	time.Sleep(time.Millisecond * time.Duration(rand.Intn(5)))
 }

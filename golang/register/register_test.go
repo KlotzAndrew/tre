@@ -11,19 +11,13 @@ func init() {
 }
 
 func TestRegister(t *testing.T) {
-	for _, tt := range []struct {
-		name string
-	}{
-		{"foo"},
-		{"bar"},
-		{"baz"},
-		{"buzz"},
-		{"faz"},
-	} {
+	time.Sleep(time.Millisecond * time.Duration(rand.Intn(10)))
+}
 
-		if value := rand.Intn(20); value < 1 {
-			time.Sleep(time.Millisecond * time.Duration(rand.Intn(20)))
-			t.Errorf("name: %v got %v, want %v", tt.name, value, 10)
-		}
-	}
+func TestVerifyEmailAddress(t *testing.T) {
+	time.Sleep(time.Millisecond * time.Duration(rand.Intn(10)))
+}
+
+func TestStartOnboardingFlow(t *testing.T) {
+	time.Sleep(time.Millisecond * time.Duration(rand.Intn(10)))
 }
