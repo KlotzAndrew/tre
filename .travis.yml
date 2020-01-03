@@ -5,4 +5,5 @@ script:
   - curl -o testrecall-uploader https://s3.amazonaws.com/releases.testrecall.com/testrecall-uploader
   - chmod +x testrecall-uploader
 
+  - ./find-branch.sh
   - ./test_golang.sh
