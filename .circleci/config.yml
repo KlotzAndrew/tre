@@ -30,7 +30,7 @@ jobs:
             curl -o reporter https://downloads.testrecall.com/reporter/releases/latest/reporter.linux-amd64
             chmod +x reporter
 
-            bundle exec rspec --format RspecJunitFormatter --out rspec.xml || true
+            bundle exec rspec --format RspecJunitFormatter --out rspec.xml
             test_result=${PIPESTATUS[0]}
 
             ./reporter \
@@ -40,4 +40,4 @@ jobs:
               -buildnumber "${CIRCLE_BUILD_NUM}" \
               -buildurl "${CIRCLE_BUILD_URL}"
 
-              exit "$test_result"
+            exit "$test_result"
