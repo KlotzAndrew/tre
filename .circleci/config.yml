@@ -34,7 +34,7 @@ jobs:
             test_result=${PIPESTATUS[0]}
 
             ./reporter \
-              -file report.xml \
+              -file rspec.xml \
               -branch "${CIRCLE_BRANCH}" \
               -sha "${CIRCLE_SHA1}" \
               -buildnumber "${CIRCLE_BUILD_NUM}" \
