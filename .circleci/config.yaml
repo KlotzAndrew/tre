@@ -1,0 +1,43 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/tre
+    docker:
+      - image: circleci/ruby:2.6.4
+        environment:
+          RAILS_ENV: test
+
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Ruby dependencies from cache
+          key: michaelfich-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install Ruby dependencies
+          command: bundle install --path vendor/bundle
+      - save_cache:
+          name: Cache Ruby dependencies
+          key: michaelfich-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+    #  - run:
+    #       name: Run Rubocop to ensure consistency of file format
+    #       command: bundle exec rubocop
+      - run:
+          name: Run Rspec automated tests
+          command: |
+            curl -o reporter https://downloads.testrecall.com/reporter/releases/latest/reporter.linux-amd64
+            chmod +x reporter
+
+            rspec --format RspecJunitFormatter --out rspec.xml || true
+            test_result=${PIPESTATUS[0]}
+
+            ./reporter \
+              -file report.xml \
+              -branch "${CIRCLE_BRANCH}" \
+              -sha "${CIRCLE_SHA1}" \
+              -buildnumber "${CIRCLE_BUILD_NUM}" \
+              -buildurl "${CIRCLE_BUILD_URL}"
+
+              exit "$test_result"
