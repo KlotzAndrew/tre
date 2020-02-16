@@ -4,6 +4,22 @@ jobs:
     working_directory: ~/tr-example
     docker:
       - image: circleci/ruby:2.6.4
+        environment:
+          RAILS_ENV: test
+
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Ruby dependencies from cache
+          key: gems-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install Ruby dependencies
+          command: bundle install --path vendor/bundle
+      - save_cache:
+          name: Cache Ruby dependencies
+          key: gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
 
       - run:
           name: Run Rspec automated tests
