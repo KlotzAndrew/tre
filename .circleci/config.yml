@@ -28,4 +28,4 @@ jobs:
             chmod +x tr-reporter
 
             gem install rspec_junit_formatter
-            bundle exec rspec --format RspecJunitFormatter --out rspec.xml | ./reporter -file rspec.xml
+            bundle exec rspec --format RspecJunitFormatter --out rspec.xml | ./tr-reporter -file rspec.xml
