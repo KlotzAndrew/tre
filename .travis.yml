@@ -2,6 +2,7 @@ language: ruby
 
 script:
   - env
+
   - bundle install
   - curl -o tr-reporter https://downloads.testrecall.com/r/latest/reporter.linux-amd64
   - chmod +x tr-reporter
