@@ -11,33 +11,21 @@ jobs:
       - checkout
       - restore_cache:
           name: Restore Ruby dependencies from cache
-          key: michaelfich-{{ checksum "Gemfile.lock" }}
+          key: gems-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install Ruby dependencies
           command: bundle install --path vendor/bundle
       - save_cache:
           name: Cache Ruby dependencies
-          key: michaelfich-{{ checksum "Gemfile.lock" }}
+          key: gems-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
-    #  - run:
-    #       name: Run Rubocop to ensure consistency of file format
-    #       command: bundle exec rubocop
       - run:
           name: Run Rspec automated tests
           command: |
-            curl -o reporter https://downloads.testrecall.com/reporter/releases/latest/reporter.linux-amd64
-            chmod +x reporter
+            curl -o tr-reporter https://downloads.testrecall.com/r/latest/reporter.linux-amd64
+            chmod +x tr-reporter
 
-            bundle exec rspec --format RspecJunitFormatter --out rspec.xml
-            test_result=${PIPESTATUS[0]}
-
-            ./reporter \
-              -file rspec.xml \
-              -branch "${CIRCLE_BRANCH}" \
-              -sha "${CIRCLE_SHA1}" \
-              -buildnumber "${CIRCLE_BUILD_NUM}" \
-              -buildurl "${CIRCLE_BUILD_URL}"
-
-            exit "$test_result"
+            gem install rspec_junit_formatter
+            bundle exec rspec --format RspecJunitFormatter --out rspec.xml | ./reporter -file rspec.xml
