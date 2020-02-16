@@ -2,7 +2,8 @@ language: ruby
 
 script:
   - bundle install
-  - curl -o testrecall-uploader https://s3.amazonaws.com/releases.testrecall.com/testrecall-uploader
-  - chmod +x testrecall-uploader
+  - curl -o tr-reporter https://downloads.testrecall.com/r/latest/reporter.linux-amd64
+  - chmod +x tr-reporter
 
-  - ./test.sh
+  - gem install rspec_junit_formatter
+  - bundle exec rspec --format RspecJunitFormatter --out report.xml | ./tr-reporter -file report.xml

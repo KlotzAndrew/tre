@@ -8,8 +8,7 @@ describe "billing" do
 
   it "make payment" do
     rand_delay(0.0, 0.5)
-    rand_fail(50)
-    assert(true).eq(false)
+    rand_fail(10)
   end
 
   it "add billing frequency" do
