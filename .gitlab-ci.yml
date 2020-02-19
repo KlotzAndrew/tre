@@ -1,0 +1,11 @@
+test:
+  stage: test
+  script:
+  - env
+
+  - bundle install --path /cache
+  - curl -o tr-reporter https://downloads.testrecall.com/r/latest/reporter.linux-amd64
+  - chmod +x tr-reporter
+
+  - gem install rspec_junit_formatter
+  - bundle exec rspec --format RspecJunitFormatter --out report.xml | ./tr-reporter -file report.xml
